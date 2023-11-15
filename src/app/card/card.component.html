@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio2"(click)= "filtermovies('all')" >ALL</label>
+           
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio1" (click)= "filtermovies('comedy')">Comedy</label>
+          
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio2"(click)= "filtermovies('action')" >Action</label>
+          
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio3" (click)= "filtermovies('horror')">Horror</label>
+          </div>
+    </div>
+          <div class="col-lg-6">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" [(ngModel)]= "movie_name" name="movie_name" type="search" placeholder="Search" aria-label="Search">              </form>
+          </div>
+    </div>
+   
+
+<div class="row">
+<div class="col-lg-4" *ngFor="let movie of filter_movies">
+<div class="card" [style.width.rem]= "card_width" [ngStyle]= "font_art" [style.border]= "card_border"> 
+    <img [src]= "movie.img" class="card-img-top" alt="..." >
+    <div class="card-body" >
+      <h5 class="card-title" [style.font-size]= "font_size" [title]= "movie.name">Name :{{movie.name|titlecase|slice :0:18}} </h5>
+      <p class="card-text">Price :{{movie.price | currency : 'INR' : true : '2.0-3'}}</p>
+      <p class="card-text">Release Date :{{movie.release_date | date:'d-MMMM-y'}}</p>
+      <p class="card-text">Rating :<app-rating [ratings]= "movie.rating" (to_parent)= "form_child($event)"> </app-rating> </p>
+      <p class="card-text">Genre :{{movie.genre}}</p>
+      <p class="card-text">Movie-code :{{movie.movie_code | custompipe : "*"}}</p>
+      <a href="#" class="btn btn-primary" (click)= "add_to_cart()">Add To Cart</a>
+    </div>
+  </div>
+</div>
+  </div>
